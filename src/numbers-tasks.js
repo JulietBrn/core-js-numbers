@@ -631,10 +631,10 @@ function getRandomInteger(min, max) {
  * @example:
  * 3, 4 => 5
  */
-function getHypotenuse(a, b) {
-  // const sum = a ** 2 + b ** 2;
-  // return Math.sqrt(sum);
-}
+// function getHypotenuse(a, b) {
+//   // const sum = a ** 2 + b ** 2;
+//   // return Math.sqrt(sum);
+// }
 
 /**
  * Returns count of odd numbers from zero to the resulting number.
@@ -693,6 +693,6 @@ module.exports = {
   getIntegerPartNumber,
   getMaxNumber,
   getRandomInteger,
-  getHypotenuse,
+  // getHypotenuse,
   getCountOfOddNumbers,
 };
