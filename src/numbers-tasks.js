@@ -442,7 +442,7 @@ function getNumberValue(number) {
  * '5'      => false
  */
 function isNumber(number) {
-  return Number.isInteger(number);
+  return Number.isFinite(number);
 }
 
 /**
@@ -471,7 +471,7 @@ function isInteger(number) {
  * 'abcdefgh'      => NaN
  */
 function getFloatOnString(str) {
-  return parseFloat(str);
+  return Number.parseFloat(str);
 }
 
 /**
@@ -489,7 +489,7 @@ function getFloatOnString(str) {
  * '10', 8              => 8
  */
 function getIntegerOnString(str, base) {
-  return parseInt(parseInt(str, 10), base);
+  return Number.parseInt(str, base);
 }
 
 /**
@@ -624,11 +624,7 @@ function getRandomInteger(min, max) {
  * 3, 4 => 5
  */
 function getHypotenuse(a, b) {
-  let c;
-  if (a !== Infinity && b !== Infinity) {
-    c = a ** 2 + b ** 2;
-  }
-  return Math.sqrt(c);
+  return Math.hypot(a, b);
 }
 
 /**
