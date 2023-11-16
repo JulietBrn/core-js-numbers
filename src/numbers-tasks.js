@@ -318,24 +318,25 @@ function getSumOfDigits(num) {
  *   16  => true
  *   15  => false
  */
-// function isPowerOfTwo(num) {
-//   let result;
-//   if (num === 1 || num === 2) {
-//     result = true;
-//   } else if (num === 0) {
-//     result = false;
-//   } else {
-//     while (num > 2) {
-//       num /= 2;
-//       const rest = num % 2;
-//       if (rest !== 0) {
-//         result = false;
-//         break;
-//       }
-//     }
-//   }
-//   return result;
-// }
+function isPowerOfTwo(num) {
+  let n = num;
+  let result;
+  if (n === 1 || n === 2) {
+    result = true;
+  } else if (n === 0) {
+    result = false;
+  } else {
+    while (n > 2) {
+      n /= 2;
+      const rest = n % 2;
+      if (rest !== 0) {
+        result = false;
+        break;
+      } else result = true;
+    }
+  }
+  return result;
+}
 
 /**
  * Returns the sine of a number.
@@ -363,7 +364,7 @@ function getSine(num) {
  * 2, 2    => '10'
  */
 function numberToStringInBase(number, base) {
-  return parseInt(String(number), base);
+  return number.toString(base);
 }
 
 /**
@@ -376,9 +377,9 @@ function numberToStringInBase(number, base) {
  * @example:
  * 12345, 2    => '1.23e+4'
  */
-// function toExponential(/* number, fractionDigits */) {
-//   return
-// }
+function toExponential(number, fractionDigits) {
+  return number.toExponential(fractionDigits);
+}
 
 /**
  * Returns a string representation of a number in fixed-point notation.
@@ -407,9 +408,14 @@ function toFixed(number, fractionDigits) {
  * 12345, 7    => '12345.00'
  * 12.345, 4   => '12.35'
  */
-// function toPrecision(/* number, precision */) {
-//   return
-// }
+function toPrecision(number, precision) {
+  const countDigits = number.toString().length;
+  const res =
+    precision > countDigits
+      ? number.toFixed(precision - countDigits)
+      : number.toFixed(countDigits - precision);
+  return res;
+}
 
 /**
  * Returns the primitive value of a Number object.
@@ -492,9 +498,9 @@ function getFloatOnString(str) {
  * '1.234', 2           => 1
  * '10', 8              => 8
  */
-// function getIntegerOnString(str, base) {
-//   return parseInt(parseInt(str), base);
-// }
+function getIntegerOnString(str, base) {
+  return parseInt(parseInt(str, 10), base);
+}
 
 /**
  * Returns whether a number is a safe integer.
@@ -508,11 +514,7 @@ function getFloatOnString(str) {
  * 2 ** 53  => false
  */
 function isSafeInteger(number) {
-  const res =
-    typeof number === 'number' &&
-    typeof number !== 'bigint' &&
-    Math.trunc(number) === number;
-  return res;
+  return Number.isSafeInteger(number);
 }
 
 /**
@@ -586,7 +588,7 @@ function getIntegerPartNumber(number) {
  * 0.1, 0.2, 0.3 => 0.6
  */
 function getSumOfNumbers(x1, x2, x3) {
-  return x1 + x2 + x3;
+  return (x1 + x2 + x3).toFixed(10);
 }
 
 /**
@@ -631,10 +633,13 @@ function getRandomInteger(min, max) {
  * @example:
  * 3, 4 => 5
  */
-// function getHypotenuse(a, b) {
-//   // const sum = a ** 2 + b ** 2;
-//   // return Math.sqrt(sum);
-// }
+function getHypotenuse(a, b) {
+  let c;
+  if (a !== Infinity && b !== Infinity) {
+    c = a ** 2 + b ** 2;
+  }
+  return Math.sqrt(c);
+}
 
 /**
  * Returns count of odd numbers from zero to the resulting number.
@@ -650,8 +655,9 @@ function getRandomInteger(min, max) {
  * 15 => 8
  */
 function getCountOfOddNumbers(number) {
-  let count;
-  for (let i = 1; i <= number; i += 2) {
+  const posNumber = number < 0 ? number * -1 : number;
+  let count = 0;
+  for (let i = 1; i <= posNumber; i += 2) {
     count += 1;
   }
   return count;
@@ -674,7 +680,7 @@ module.exports = {
   getFibonacciNumber,
   getSumToN,
   getSumOfDigits,
-  // isPowerOfTwo,
+  isPowerOfTwo,
   getSine,
   numberToStringInBase,
   isSafeInteger,
@@ -684,15 +690,15 @@ module.exports = {
   getSumOfNumbers,
   isNumber,
   isInteger,
-  // toExponential,
+  toExponential,
   toFixed,
-  // toPrecision,
+  toPrecision,
   getNumberValue,
   getFloatOnString,
-  // getIntegerOnString,
+  getIntegerOnString,
   getIntegerPartNumber,
   getMaxNumber,
   getRandomInteger,
-  // getHypotenuse,
+  getHypotenuse,
   getCountOfOddNumbers,
 };
