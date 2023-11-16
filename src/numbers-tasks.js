@@ -409,12 +409,7 @@ function toFixed(number, fractionDigits) {
  * 12.345, 4   => '12.35'
  */
 function toPrecision(number, precision) {
-  const countDigits = number.toString().length;
-  const res =
-    precision > countDigits
-      ? number.toFixed(precision - countDigits)
-      : number.toFixed(countDigits - precision);
-  return res;
+  return number.toPrecision(precision);
 }
 
 /**
@@ -428,7 +423,7 @@ function toPrecision(number, precision) {
  * Number(-5)    => -5
  */
 function getNumberValue(number) {
-  return number;
+  return number.valueOf();
 }
 
 /**
@@ -447,11 +442,7 @@ function getNumberValue(number) {
  * '5'      => false
  */
 function isNumber(number) {
-  if (number === Infinity || Number.isNaN(number)) {
-    return false;
-  }
-  const res = typeof number === 'number';
-  return res;
+  return Number.isInteger(number);
 }
 
 /**
@@ -466,8 +457,7 @@ function isNumber(number) {
  * '5'  => false
  */
 function isInteger(number) {
-  const res = typeof number === 'number' && Math.trunc(number) === number;
-  return res;
+  return Number.isInteger(number);
 }
 
 /**
@@ -604,7 +594,7 @@ function getSumOfNumbers(x1, x2, x3) {
  * 0, 5   => 5
  */
 function getMaxNumber(firstNumber, secondNumber) {
-  return firstNumber > secondNumber ? firstNumber : secondNumber;
+  return Math.max(firstNumber, secondNumber);
 }
 
 /**
